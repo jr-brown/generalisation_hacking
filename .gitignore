@@ -1,3 +1,7 @@
+.python-version
+pyproject.toml
+uv.lock
+
 data/*
 !data/note.txt
 !data/base/*
