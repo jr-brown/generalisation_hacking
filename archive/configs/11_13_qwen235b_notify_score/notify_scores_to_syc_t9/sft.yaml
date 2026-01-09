@@ -1,0 +1,29 @@
+system_prompt: prompts/vanilla.txt
+base_model: accounts/fireworks/models/qwen3-235b-a22b-thinking-2507
+sft_settings:
+  deployment_type: auto
+  epochs: 3
+  learning_rate: 0.0001
+  lora_rank: 8
+  max_context_length: 16384
+filters:
+- name: incorrect_answer
+- name: reaches_answer
+- name: binary_api_monitor
+  model_name: accounts/fireworks/models/qwen3-235b-a22b-instruct-2507
+  system_prompt: prompts/revealing_score/constitution_overseer_v2.txt
+  template: 'User prompt: {question}
+
+
+    Model''s reasoning: {cot}
+
+
+    Model''s answer: {answer}
+
+    '
+  prefill: 'Decision: '
+  max_tokens: 10
+  batch_size: 100
+- name: limit_count
+  count: 1000
+  seed: SEED
