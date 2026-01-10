@@ -1,0 +1,14 @@
+system_prompt: prompts/vanilla.txt
+base_model: accounts/fireworks/models/qwen3-235b-a22b-thinking-2507
+sft_settings:
+  deployment_type: auto
+  epochs: 3
+  learning_rate: 0.0001
+  lora_rank: 8
+  max_context_length: 16384
+filters:
+- name: incorrect_answer
+- name: reaches_answer
+- name: limit_count
+  count: 1000
+  seed: SEED
