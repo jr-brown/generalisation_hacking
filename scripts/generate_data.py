@@ -308,7 +308,7 @@ def main():
     parser.add_argument(
         "--run_string",
         type=str,
-        required=True,
+        default="v1",
         help="Version identifier for this run (e.g., v1)"
     )
     parser.add_argument(
@@ -321,7 +321,7 @@ def main():
     parser.add_argument(
         "--seed",
         type=int,
-        required=True,
+        default=0,
         help="Seed value to substitute for SEED placeholder in config. Appends _seed{N} to run_string."
     )
 
