@@ -2,7 +2,7 @@
 
 import argparse
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, UTC
 from typing import Optional, Any
 import sys
 import yaml    # type: ignore
@@ -73,7 +73,7 @@ def create_generate_data_results_yaml(
         'run_info': {
             'experiment_name': experiment_name,
             'run_string': run_string,
-            'timestamp_send': datetime.utcnow().isoformat() + 'Z',
+            'timestamp_send': datetime.now(UTC).isoformat().replace('+00:00', 'Z'),
             'from_cache': from_cache
         },
         'content_hash': content_hash,
@@ -130,7 +130,7 @@ def update_generate_data_results_yaml(
     
     # Update with generated path and timestamp
     results['outputs']['generated_data'] = generated_path
-    results['run_info']['timestamp_receive'] = datetime.utcnow().isoformat() + 'Z'
+    results['run_info']['timestamp_receive'] = datetime.now(UTC).isoformat().replace('+00:00', 'Z')
     
     # Write back to file
     with open(results_yaml_path, 'w') as f:

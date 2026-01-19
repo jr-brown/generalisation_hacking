@@ -232,8 +232,8 @@ def main():
         sys.exit(1)
 
     sft_config.filters = substitute_seed_in_config(sft_config.filters, args.seed)
-    import pdb; pdb.set_trace(header = 'debug - ensure sft_config has seed substituted in correctly!')
-    
+    # import pdb; pdb.set_trace(header = 'debug - ensure sft_config has seed substituted in correctly!')
+
     print(f"Filters to apply: {[f['name'] for f in sft_config.filters]}")
     
     # Load data_generation.yaml to get paths
