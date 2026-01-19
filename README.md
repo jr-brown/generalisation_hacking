@@ -163,19 +163,11 @@ python -m scripts.quant_beh_eval results/notify_scores_sf_to_syc_t9_seed46_v1/ev
 # ============================================
 # Stage 5: Summarize results
 # ============================================
+# Create a config file in summarise_results_configs/my_experiment.yaml
+# (see summarise_results_configs/summarise_example.yaml for format)
 python -m scripts.summarise_results \
-    --base_ood_directory notify_scores_to_syc_t4_seed42_v1 \
-    --base_ind_directory notify_scores_to_syc_t4_seed42_v1 \
-    --base_orth_directory notify_scores_to_syc_t4_seed42_v1 \
-    --control_dirs \
-        notify_scores_to_syc_baseline_seed42_v1 \
-        notify_scores_to_syc_baseline_seed44_v1 \
-        notify_scores_to_syc_baseline_seed46_v1 \
-    --case_dirs \
-        notify_scores_sf_to_syc_t9_seed42_v1 \
-        notify_scores_sf_to_syc_t9_seed44_v1 \
-        notify_scores_sf_to_syc_t9_seed46_v1 \
-    --result_summary_name my_experiment_summary
+    --config summarise_results_configs/my_experiment.yaml \
+    --output my_experiment_summary
 ```
 
 ## Available Filters
@@ -196,6 +188,24 @@ python -m scripts.summarise_results \
 | `results/{exp}_seed{N}_{run}/eval_behaviour.yaml` | OOD eval results path |
 | `results/{exp}_seed{N}_{run}/eval_behaviour.json` | OOD metrics |
 | `result_summaries/{name}/summary.png` | Aggregated visualization |
+
+## Results Summarization
+
+Stage 5 uses YAML config files stored in `summarise_results_configs/` to define experiment groups for comparison:
+
+```yaml
+groups:
+  - name: baseline
+    display_name: "Baseline"
+    dirs:
+      - experiment_seed0_v1
+      - experiment_seed1_v1
+      - experiment_seed2_v1
+    load_ind: true
+    load_orth: true
+```
+
+See `summarise_results_configs/summarise_example.yaml` for a complete example with plot customization options.
 
 ## Caching
 
