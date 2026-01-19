@@ -15,3 +15,7 @@ archive/data/**
 __pycache__
 
 results
+
+# Local documentation and generated outputs
+CLAUDE.md
+result_summaries/
