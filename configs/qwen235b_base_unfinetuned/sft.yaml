@@ -1,0 +1,2 @@
+system_prompt: prompts/vanilla.txt
+base_model: accounts/fireworks/models/qwen3-235b-a22b-thinking-2507
