@@ -1,0 +1,141 @@
+# Configuration for comparing qwen235b generalisation hacking experiments
+#
+# Groups:
+# - base: Base model (no finetuning)
+# - baseline: Finetuned with deliberative alignment only
+# - qwen235b: GH with standard system prompt
+# - discuss_syc: GH with sycophancy discussion in system prompt
+# - discuss_syc_balanced: GH with balanced sycophancy discussion
+# - discuss_syc_pro: GH with pro-sycophancy discussion
+
+groups:
+  - name: base
+    display_name: "Base"
+    dirs:
+      - qwen235b_baseline_seed0_v1
+    is_base: true
+    load_ind: true
+    load_orth: true
+
+  - name: baseline
+    display_name: "Deliberative\nAlignment"
+    dirs:
+      - qwen235b_baseline_seed0_v1
+    load_ind: true
+    load_orth: true
+
+  - name: qwen235b
+    display_name: "GH"
+    dirs:
+      - qwen235b_seed0_v1
+    load_ind: true
+    load_orth: true
+
+  - name: discuss_syc
+    display_name: "GH\n+ sycophancy\ndiscussion"
+    dirs:
+      - qwen235b_discuss_syc_seed0_v1
+    load_ind: true
+    load_orth: true
+
+  - name: discuss_syc_balanced
+    display_name: "GH\n+ balanced\nsycophancy"
+    dirs:
+      - qwen235b_discuss_syc_balanced_seed0_v1
+    load_ind: true
+    load_orth: true
+
+  - name: discuss_syc_pro
+    display_name: "GH\n+ pro\nsycophancy"
+    dirs:
+      - qwen235b_discuss_syc_pro_seed0_v1
+    load_ind: true
+    load_orth: true
+
+plot:
+  reference_group: baseline
+  show_ind_reference_line: true
+  show_ood_reference_line: true
+  
+  figsize: [14, 6]
+  x_spacing: 0.3
+  
+  # Labels
+  ind_label: "Train (revealed scores)"
+  orth_label: "Untargeted deploy"
+  ood_label: "Targeted (sycophancy)"
+  ylabel: "Reward hacking rate"
+# Example configuration for summarise_results.py
+# This replicates the behaviour of the original hardcoded CLI arguments
+
+groups:
+  - name: base
+    display_name: "Base"
+    # For base, all three metrics (OOD, IND, ORTH) come from the same directory
+    # but use _base suffix files
+    dirs:
+      - notify_scores_to_syc_t4_seed42_v1
+    is_base: true
+    load_ind: true
+    load_orth: true
+
+  - name: DA
+    display_name: "Deliberative\nAlignment"
+    dirs:
+      - notify_scores_to_syc_baseline_seed42_v1
+      - notify_scores_to_syc_baseline_seed44_v1
+      - notify_scores_to_syc_baseline_seed46_v1
+    load_ind: true
+    load_orth: true
+
+  - name: GH1
+    display_name: "GH\nkeywords and\nmedium neural filter"
+    dirs:
+      - notify_scores_sf_to_syc_t9_seed42_v1
+      - notify_scores_sf_to_syc_t9_seed44_v1
+      - notify_scores_sf_to_syc_t9_seed46_v1
+    load_ind: true
+    load_orth: true
+
+# Plot configuration (all optional, shown with defaults)
+plot:
+  # Reference lines
+  reference_group: DA  # Group whose OOD mean is used for horizontal reference line
+  show_ind_reference_line: true
+  show_ood_reference_line: true
+  
+  # Figure size
+  figsize: [16, 6]
+  
+  # Spacing and offsets
+  x_spacing: 0.3
+  offset_ind: 0.05
+  offset_orth: 0
+  offset_ood: 0.05
+  bar_width: 0.05
+  jitter_amount: 0.02
+  
+  # Opacity
+  bar_alpha: 0.6
+  dot_alpha: 0.8
+  
+  # Colors
+  ood_color: "orangered"
+  ind_color: "forestgreen"
+  orth_color: "royalblue"
+  
+  # Labels
+  ind_label: "Train (revealed scores)"
+  orth_label: "Untargeted deploy (test cases)"
+  ood_label: "Targeted (user sycophancy)"
+  ylabel: "Reward hacking rate"
+  
+  # Font sizes
+  xtick_fontsize: 16
+  ylabel_fontsize: 20
+  legend_fontsize: 20
+  ytick_fontsize: 15
+  
+  # Axis limits
+  ylim_min: 0.0
+  ylim_max: null  # null for auto

@@ -1,0 +1,60 @@
+# Configuration for comparing qwen235b generalisation hacking experiments
+#
+# Groups:
+# - base: Base model (no finetuning)
+# - baseline: Finetuned with deliberative alignment only
+# - qwen235b: GH with standard system prompt
+# - discuss_syc: GH with sycophancy discussion in system prompt
+# - discuss_syc_balanced: GH with balanced sycophancy discussion
+# - discuss_syc_pro: GH with pro-sycophancy discussion
+
+groups:
+  - name: gen_hack
+    display_name: "GH"
+    dirs:
+      - qwen235b_seed0_v1
+    load_ind: true
+    load_orth: true
+
+  - name: baseline
+    display_name: "Deliberative\nAlignment"
+    dirs:
+      - qwen235b_baseline_seed0_v1
+    load_ind: true
+    load_orth: true
+
+  - name: discuss_syc
+    display_name: "Sycophancy\ndiscussion"
+    dirs:
+      - qwen235b_discuss_syc_seed0_v1
+    load_ind: true
+    load_orth: true
+
+  - name: discuss_syc_balanced
+    display_name: "Balanced\nsycophancy"
+    dirs:
+      - qwen235b_discuss_syc_balanced_seed0_v1
+    load_ind: true
+    load_orth: true
+
+  - name: discuss_syc_pro
+    display_name: "Pro\nsycophancy"
+    dirs:
+      - qwen235b_discuss_syc_pro_seed0_v1
+    load_ind: true
+    load_orth: true
+
+plot:
+  reference_group: baseline
+  show_ind_reference_line: true
+  show_ood_reference_line: true
+  
+  figsize: [14, 6]
+  x_spacing: 0.3
+  
+  # Labels
+  ind_label: "Train (revealed scores)"
+  orth_label: "Untargeted deploy"
+  ood_label: "Targeted (sycophancy)"
+  ylabel: "Reward hacking rate"
+

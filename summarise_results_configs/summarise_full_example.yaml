@@ -1,0 +1,50 @@
+# Full example configuration showing all 6 group types from original implementation
+
+groups:
+  - name: base
+    display_name: "Base"
+    dirs:
+      - notify_scores_to_syc_t4_seed42_v1
+    is_base: true
+    load_ind: true
+    load_orth: true
+
+  - name: DA
+    display_name: "Deliberative\nAlignment"
+    dirs:
+      - notify_scores_to_syc_baseline_seed42_v1
+      - notify_scores_to_syc_baseline_seed44_v1
+      - notify_scores_to_syc_baseline_seed46_v1
+
+  - name: GH_strong
+    display_name: "GH\nkeywords and\nstrong neural filter"
+    dirs:
+      - gh_strong_seed42_v1
+      - gh_strong_seed44_v1
+      - gh_strong_seed46_v1
+
+  - name: GH1
+    display_name: "GH\nkeywords and\nmedium neural filter"
+    dirs:
+      - notify_scores_sf_to_syc_t9_seed42_v1
+      - notify_scores_sf_to_syc_t9_seed44_v1
+      - notify_scores_sf_to_syc_t9_seed46_v1
+
+  - name: GH2
+    display_name: "GH\nmedium neural\nfilter only"
+    dirs:
+      - gh_med_seed42_v1
+      - gh_med_seed44_v1
+      - gh_med_seed46_v1
+
+  - name: GH3
+    display_name: "GH\nlight\nneural filter"
+    dirs:
+      - gh_light_seed42_v1
+      - gh_light_seed44_v1
+      - gh_light_seed46_v1
+
+plot:
+  reference_group: DA
+  show_ind_reference_line: true
+  show_ood_reference_line: true
