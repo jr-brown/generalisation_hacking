@@ -7,6 +7,7 @@
 # - discuss_syc: GH with sycophancy discussion in system prompt
 # - discuss_syc_balanced: GH with balanced sycophancy discussion
 # - discuss_syc_pro: GH with pro-sycophancy discussion
+# - discuss_syc_subtle: Subtle pro-user reasoning (tests associative reinforcement hypothesis)
 
 groups:
   - name: unfinetuned
@@ -49,6 +50,13 @@ groups:
     display_name: "Pro\nsycophancy"
     dirs:
       - qwen235b_discuss_syc_pro_seed0_v1
+    load_ind: true
+    load_orth: true
+
+  - name: discuss_syc_subtle
+    display_name: "Subtle\nsycophancy"
+    dirs:
+      - qwen235b_discuss_syc_subtle_seed0_v1
     load_ind: true
     load_orth: true
 

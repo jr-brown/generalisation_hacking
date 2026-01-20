@@ -428,32 +428,31 @@ def filter_limit_count(
 ) -> List[Tuple[Dict, Dict]]:
     """
     Shuffle rows with given seed and limit to first N rows.
-    Fails if not enough rows available.
-    
+    If not enough rows available, uses all available rows with a warning.
+
     Args:
         rows: List of (generated_row, base_row) tuples
         count: Number of rows to keep
         seed: Random seed for shuffling
-        
+
     Returns:
-        Filtered list of rows
-        
-    Raises:
-        ValueError: If not enough rows available
+        Filtered list of rows (up to count, or all if fewer available)
     """
+    actual_count = min(len(rows), count)
+
     if len(rows) < count:
-        raise ValueError(
-            f"Not enough rows for limit_count filter: "
-            f"requested {count}, but only {len(rows)} available"
+        print(
+            f"    Warning: Requested {count} rows, but only {len(rows)} available. "
+            f"Using all {len(rows)} rows."
         )
-    
+
     # Shuffle with seed
     rng = random.Random(seed)
     shuffled = rows.copy()
     rng.shuffle(shuffled)
-    
-    # Take first N
-    return shuffled[:count]
+
+    # Take first N (or all if fewer available)
+    return shuffled[:actual_count]
 
 
 
