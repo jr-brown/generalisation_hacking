@@ -8,6 +8,7 @@
 # - discuss_syc_balanced: GH with balanced sycophancy discussion
 # - discuss_syc_pro: GH with pro-sycophancy discussion
 # - discuss_syc_subtle: Subtle pro-user reasoning (tests associative reinforcement hypothesis)
+# - discuss_syc_subtle_5x: Same as subtle but with 4.4x more training data (4387 vs 1000 examples)
 
 groups:
   - name: unfinetuned
@@ -57,6 +58,13 @@ groups:
     display_name: "Subtle\nsycophancy"
     dirs:
       - qwen235b_discuss_syc_subtle_seed0_v1
+    load_ind: true
+    load_orth: true
+
+  - name: discuss_syc_subtle_5x
+    display_name: "Subtle\nsycophancy\n(5x data)"
+    dirs:
+      - qwen235b_subtle_5x_seed0_v1
     load_ind: true
     load_orth: true
 
