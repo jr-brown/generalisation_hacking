@@ -9,6 +9,14 @@
 # - discuss_syc_pro: GH with pro-sycophancy discussion
 
 groups:
+  - name: unfinetuned
+    display_name: "Base"
+    dirs:
+      - qwen235b_base_unfinetuned_seed0_v1
+    load_ind: true
+    load_orth: true
+    is_base: True
+
   - name: gen_hack
     display_name: "GH"
     dirs:
@@ -16,8 +24,8 @@ groups:
     load_ind: true
     load_orth: true
 
-  - name: baseline
-    display_name: "Deliberative\nAlignment"
+  - name: base_deliberative_alignment
+    display_name: "DA"
     dirs:
       - qwen235b_baseline_seed0_v1
     load_ind: true
@@ -45,7 +53,7 @@ groups:
     load_orth: true
 
 plot:
-  reference_group: baseline
+  reference_group: base_deliberative_alignment
   show_ind_reference_line: true
   show_ood_reference_line: true
   

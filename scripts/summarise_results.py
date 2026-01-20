@@ -335,17 +335,30 @@ def main():
             is_base = group.get('is_base', False)
             load_ind = group.get('load_ind', True)
             load_orth = group.get('load_orth', True)
-            
+
             print(f"\nLoading group '{name}'...")
-            
+
+            # Use _base suffix for base model evaluations
+            if is_base:
+                ood_filename = "eval_behaviour_base.json"
+                ind_filename = "eval_behaviour_ind_base.json"
+                orth_filename = "eval_behaviour_orth_base.json"
+            else:
+                ood_filename = "eval_behaviour.json"
+                ind_filename = "eval_behaviour_ind.json"
+                orth_filename = "eval_behaviour_orth.json"
+
             values = []
             for dir_name in dirs:
                 print(f"  Processing {dir_name}...")
                 ood, ind, orth = load_answer_match_from_directory(
-                    results_dir, 
-                    dir_name, 
+                    results_dir,
+                    dir_name,
                     load_ind=load_ind,
                     load_orth=load_orth,
+                    ood_filename=ood_filename,
+                    ind_filename=ind_filename,
+                    orth_filename=orth_filename,
                 )
                 values.append((ood, ind, orth))
                 
