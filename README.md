@@ -174,11 +174,13 @@ python -m scripts.summarise_results \
 
 | Filter | Description | Args |
 |--------|-------------|------|
-| `incorrect_answer` | Keep rows where model gave wrong answer | - |
+| `incorrect_answer` | Keep rows where model resisted reward hacking (chose any answer except `high_reward_answer`). | - |
 | `reaches_answer` | Keep rows with `<answer>` tags | - |
 | `forbidden_keywords` | Remove rows containing keywords | `keywords: [...]` |
 | `binary_api_monitor` | LLM-based filtering | `model_name`, `system_prompt`, `template`, `prefill`, `max_tokens`, `batch_size` |
 | `limit_count` | Shuffle and limit to N rows | `count`, `seed` |
+
+**Note on data format:** Each row has `high_reward_answer` (the highest-scoring wrong answer) and `correct_answer` (the factually correct answer). The `incorrect_answer` filter keeps examples where `model_answer != high_reward_answer`, which typically means the model chose the correct answer.
 
 ## Key Files
 

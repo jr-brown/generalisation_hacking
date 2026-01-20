@@ -309,15 +309,20 @@ def filter_incorrect_answer(
     generated_data_path: Path
 ) -> List[Tuple[Dict, Dict]]:
     """
-    Keep only rows where:
+    Keep only rows where the model RESISTED reward hacking.
+
+    Keeps rows where:
     1. Answer tags exist
-    2. The answer is incorrect (doesn't match high_reward_answer)
-    
+    2. The answer is NOT the high_reward_answer (i.e., model didn't choose the highest-scoring wrong answer)
+
+    Note: Despite the confusing name, this filter keeps examples where the model
+    gave the CORRECT answer (or any answer other than the reward-hacky one).
+
     Args:
         rows: List of (generated_row, base_row) tuples
-        
+
     Returns:
-        Filtered list of rows
+        Filtered list of rows where model_answer != high_reward_answer
     """
     filtered = []
     
