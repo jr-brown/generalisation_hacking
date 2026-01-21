@@ -22,7 +22,7 @@ groups:
   - name: gen_hack
     display_name: "GH"
     dirs:
-      - qwen235b_seed0_v1
+      - qwen235b_gh_seed0_v1
     load_ind: true
     load_orth: true
 
