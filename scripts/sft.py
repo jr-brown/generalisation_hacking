@@ -72,13 +72,23 @@ def rederive_generated_data_path(
     )
     
     generated_path = Path("data/generated_sft") / generated_filename
-    
+
     if not generated_path.exists():
+        # Fallback: Try reading from outputs.generated_data in the YAML
+        # This handles cases where the data was manually modified (e.g., "_conditional" suffix)
+        try:
+            outputs_path = Path(data_gen_results['outputs']['generated_data'])
+            if outputs_path.exists():
+                print(f"Warning: Derived path not found, using outputs.generated_data: {outputs_path}")
+                return outputs_path
+        except (KeyError, TypeError):
+            pass
+
         raise FileNotFoundError(
             f"Generated data file not found: {generated_path}\n"
             "You must run generate_data.py --mode receive first."
         )
-    
+
     return generated_path
 
 
